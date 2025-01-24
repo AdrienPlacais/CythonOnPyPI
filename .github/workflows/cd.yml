@@ -92,7 +92,7 @@ jobs:
 
   upload:
     name: Upload packages to TestPyPI
-    needs: [build-linux-cp12, build-macos, build-windows]
+    needs: [build-linux-cp312, build-macos, build-windows]
 
     runs-on: ubuntu-latest
 
@@ -138,10 +138,7 @@ jobs:
     - run: mv -v dist-windows-3.12/* dist/
 
     - name: Upload with twine
-      env:
-        TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
-        TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
       run: |
         ls -l dist/*
         pip install twine
-        twine upload --repository testpypi dist/* --verbose
+        python -m twine upload --repository testpypi dist/* --verbose
