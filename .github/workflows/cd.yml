@@ -91,8 +91,17 @@ jobs:
         path: dist
 
   upload:
+    name: Upload packages to TestPyPI
     needs: [build-linux-cp12, build-macos, build-windows]
+
     runs-on: ubuntu-latest
+
+    environment:
+      name: release
+      url: https://test.pypi.org/p/CythonOnPyPI
+
+    permissions:
+      id-token: write
 
     steps:
     - uses: actions/checkout@v2
