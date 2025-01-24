@@ -6,3 +6,8 @@ clean-ext:
 
 compile:
 	python setup.py build_ext --inplace
+
+pypi:
+	make clean
+	python -m build
+	python -m twine upload --repository testpypi dist/*
