@@ -10,4 +10,4 @@ compile:
 pypi:
 	make clean
 	python -m build
-	python -m twine upload --repository testpypi dist/*
+	python -m twine upload --repository testpypi dist/* --verbose
