@@ -11,13 +11,17 @@ jobs:
       container: quay.io/pypa/manylinux2014_x86_64
 
       steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Install Python package dependencies
-        run: /opt/python/cp312-cp312/bin/python -m pip install cython wheel setuptools
+        # run: /opt/python/cp312-cp312/bin/python -m pip install cython wheel setuptools
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
 
       - name: Build binary wheel
-        run: /opt/python/cp312-cp312/bin/python setup.py bdist_wheel
+        # run: /opt/python/cp312-cp312/bin/python setup.py bdist_wheel
+        run: python setup.py bdist_wheel
 
       - name: Apply auditwheel for manylinux wheel
         run: auditwheel repair -w dist dist/*
