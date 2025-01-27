@@ -47,5 +47,4 @@ requires = [
    "Cython>=3, <4",
    "numpy>=2, <3",
    "setuptools-scm>=8, <9",
-   "wheel",
 ]
