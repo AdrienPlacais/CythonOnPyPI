@@ -27,7 +27,7 @@ jobs:
         run: python -m build
 
       - name: Apply auditwheel for manylinux wheel
-        run: auditwheel repair -w dist dist/*
+        run: auditwheel repair -w dist dist/*.whl
 
       - name: Remove linux wheel
         run: rm dist/*-linux_x86_64.whl
