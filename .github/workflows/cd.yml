@@ -26,8 +26,8 @@ jobs:
         # run: /opt/python/cp312-cp312/bin/python setup.py bdist_wheel
         run: python setup.py bdist_wheel
 
-      - name: Apply auditwheel for manylinux wheel
-        run: auditwheel repair -w dist dist/*
+      # - name: Apply auditwheel for manylinux wheel
+      #   run: auditwheel repair -w dist dist/*
 
       - name: Remove linux wheel
         run: rm dist/*-linux_x86_64.whl
