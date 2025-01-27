@@ -26,17 +26,29 @@ jobs:
         # run: /opt/python/cp312-cp312/bin/python setup.py bdist_wheel
         run: python -m build
 
+      - name: List files before auditwheel
+        run: tree
+
       - name: Apply auditwheel for manylinux wheel
         run: auditwheel repair -w dist dist/*.whl
 
+      - name: List files after auditwheel
+        run: tree
+
       - name: Remove linux wheel
         run: rm dist/*-linux_x86_64.whl
+
+      - name: List files before archive
+        run: tree
 
       - name: Archive dist artifacts
         uses: actions/upload-artifact@v4
         with:
           name: dist-linux-3.12
           path: dist
+
+      - name: List files after archive
+        run: tree
 
   build-macos:
       runs-on: macos-latest
