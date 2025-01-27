@@ -40,7 +40,7 @@ package-dir = { "" = "src" }
 [tool.cibuildwheel]
 build = "cp312-*"
 build-verbosity = 1
-test-command = 'pytest {project}/tests -m "not cython"'
+test-command = 'pytest {project}/tests -m'
 # Install [test] dependencies:
 test-extras = "test"
 
