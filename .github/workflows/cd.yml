@@ -53,7 +53,7 @@ jobs:
         name: cibw-sdist
         path: dist/*.tar.gz
 
-  upload_all:
+  upload_all_hello:
     needs: [build_wheels, make_sdist]
     environment: release
     permissions:
