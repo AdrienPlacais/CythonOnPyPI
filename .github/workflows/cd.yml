@@ -68,6 +68,9 @@ jobs:
           name: dist-macos-${{ matrix.python-version }}
           path: dist
 
+      - name: Install tree
+        run: brew install tree
+
       - name: List files
         run: tree
 
