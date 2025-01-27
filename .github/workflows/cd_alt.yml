@@ -1,9 +1,6 @@
 name: CD with cibuildwheel
-on:
-  workflow_dispatch:
-  push:
-    tags:
-      - v*
+
+on: [push, pull_request]
 
 jobs:
   build_wheels:
