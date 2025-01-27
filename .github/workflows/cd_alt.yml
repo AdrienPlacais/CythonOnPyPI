@@ -6,7 +6,6 @@ on:
       - v*
 
 jobs:
-  jobs:
   build_wheels:
     name: Build wheels on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
