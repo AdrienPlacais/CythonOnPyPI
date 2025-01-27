@@ -29,8 +29,8 @@ jobs:
       # - name: Apply auditwheel for manylinux wheel
       #   run: auditwheel repair -w dist dist/*
 
-      - name: Remove linux wheel
-        run: rm dist/*-linux_x86_64.whl
+      # - name: Remove linux wheel
+      #   run: rm dist/*-linux_x86_64.whl
 
       - name: Archive dist artifacts
         uses: actions/upload-artifact@v4
