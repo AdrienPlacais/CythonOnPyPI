@@ -26,20 +26,11 @@ jobs:
         # run: /opt/python/cp312-cp312/bin/python setup.py bdist_wheel
         run: python -m build
 
-      - name: List files before auditwheel
-        run: tree
-
       - name: Apply auditwheel for manylinux wheel
         run: auditwheel repair -w dist dist/*.whl
 
-      - name: List files after auditwheel
-        run: tree
-
       - name: Remove linux wheel
         run: rm dist/*-linux_x86_64.whl
-
-      - name: List files before archive
-        run: tree
 
       - name: Archive dist artifacts
         uses: actions/upload-artifact@v4
@@ -76,6 +67,9 @@ jobs:
         with:
           name: dist-macos-${{ matrix.python-version }}
           path: dist
+
+      - name: List files
+        run: tree
 
   build-windows:
     runs-on: windows-latest
@@ -138,17 +132,17 @@ jobs:
     - name: Create source dist
       run: python setup.py sdist
 
-    - name: Stage linux 3.12
-      uses: actions/download-artifact@v4
-      with:
-        name: dist-linux-3.12
-    - run: mv -v dist-linux-3.12/* dist/
-
     - name: Stage macos 3.12
       uses: actions/download-artifact@v4
       with:
         name: dist-macos-3.12
     - run: mv -v dist-macos-3.12/* dist/
+
+    - name: Stage linux 3.12
+      uses: actions/download-artifact@v4
+      with:
+        name: dist-linux-3.12
+    - run: mv -v dist-linux-3.12/* dist/
 
     - name: Stage windows 3.12
       uses: actions/download-artifact@v4
