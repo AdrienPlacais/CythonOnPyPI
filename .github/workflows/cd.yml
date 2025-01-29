@@ -26,6 +26,9 @@ jobs:
           - [ubuntu-24.04-arm, musllinux_aarch64]
           - [windows-latest, win_amd64]
         python: ["cp312", "cp313"]
+        exclude:
+          # Does not manage to build scipy
+          - builplat: [ubuntu-24.04-arm, musllinux_aarch64]
 
     steps:
       - name: 🔍 Checkout current repo
