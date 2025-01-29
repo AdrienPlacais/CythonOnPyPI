@@ -23,7 +23,7 @@ MODULES = (
     "scipy",
     "shutil",
     "sys",
-    "tkinter",
+    # "tkinter",
     "typing",
 )
 

@@ -36,3 +36,6 @@ They *could* be compiled, but this is not so important.
 > In the end, it was necessary to manually set which OS and architectures should be built.
 > This is also what other libraries, such as `scipy` or `numpy`, do.
 > Maybe I'll have to update this workflow from time to time...
+
+Note that `tkinter` import will fail on `win_amd64`.
+So I should refactor code where `tkinter is required`.
