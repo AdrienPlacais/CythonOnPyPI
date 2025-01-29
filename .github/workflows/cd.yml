@@ -22,23 +22,24 @@ jobs:
           - [macos-13, macosx_x86_64]
           - [macos-latest, macosx_arm64]
           # Ubuntu
-          # # 32 bits
+          ### 32 bits
           - [ubuntu-latest, manylinux_i686]
           - [ubuntu-latest, musllinux_i686]
-          # # 64 bits
+          ### 64 bits
           - [ubuntu-latest, manylinux_x86_64]
           - [ubuntu-latest, musllinux_x86_64]
           - [ubuntu-24.04-arm, manylinux_aarch64]
           - [ubuntu-24.04-arm, musllinux_aarch64]
           # Windows
-          # # 32 bits
+          ### 32 bits
           - [windows-latest, win32]
-          # # 64 bits
+          ### 64 bits
           - [windows-latest, win_amd64]
         python: ["cp312", "cp313"]
         exclude:
           # Does not manage to build scipy
           - buildplat: [ubuntu-24.04-arm, musllinux_aarch64]
+          - buildplat: [ubuntu-latest, manylinux_i686]
           # Does not manage to build matplotlib
           - buildplat: [windows-latest, win32]
 
