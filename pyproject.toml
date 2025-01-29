@@ -42,7 +42,6 @@ package-dir = { "" = "src" }
 [tool.setuptools_scm]
 
 [tool.cibuildwheel]
-archs = "auto64"
 build-verbosity = 1
 test-command = 'pytest {project}/tests'
 test-extras = "test"
