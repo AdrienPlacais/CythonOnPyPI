@@ -36,7 +36,7 @@ jobs:
       - name: 🐍 Setup Python ${{ matrix.python }} on ${{ matrix.buildplat[0] }}
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python }}
+          python-version: "3.12"
 
       - name: 🔧 Build wheels
         uses: pypa/cibuildwheel@v2.22.0
