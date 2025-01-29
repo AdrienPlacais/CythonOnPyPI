@@ -10,51 +10,22 @@ on:
 
 jobs:
   build_wheels:
-    name: 🎡 Build wheels ${{ matrix.os }}-${{ matrix.platform_id }}-${{ matrix.python-version }}
-    runs-on: ${{ matrix.os }}
+    name: 🎡 Build wheels ${{ matrix.python }}-${{ matrix.buildplat[1] }}-${{ matrix.buildplat[2] }}
+    runs-on: ${{ matrix.buildplat[0] }}
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-13, macos-latest, ubuntu-latest, ubuntu-24.04-arm, windows-latest]
-        python-version: [3.12]
-        exclude:
-          - os: ubuntu-24.04-arm
-            python-version: 3.12
-            platform_id: musllinux_aarch64
-        # include:
-          # =====
-          # MacOS
-          # =====
-          # - os: macos-13
-          #   python: 3.12
-          #   platform_id: macosx_x86_64
-          # - os: macos-latest
-          #   python: 3.12
-          #   platform_id: macosx_arm64
-          # ======
-          # Ubuntu
-          # ======
-          ## Latest
-          # - os: ubuntu-latest
-          #   python: 3.12
-          #   platform_id: manylinux_x86_64
-          # - os: ubuntu-latest
-          #   python: 3.12
-          #   platform_id: musllinux_x86_64
-          ## 24
-          # - os: ubuntu-24.04-arm
-          #   python: 3.12
-          #   platform_id: manylinux_aarch64
-          # This one will fail on CP312; deactivate it for now...
-          # - os: ubuntu-24.04-arm
-          #   python: 3.12
-          #   platform_id: musllinux_aarch64
-          # =======
-          # Windows
-          # =======
-          # - os: windows-latest
-          #   python: 3.12
-          #   platform_id: win_amd64
+        # This is taken from numpy's wheel.yml
+        # See also: https://github.com/github/feedback/discussions/7835#discussioncomment-1769026
+        buildplat:
+          - [macos-13, macosx_x86_64, ""]
+          - [macos-latest, macosx_arm64, ""]
+          - [ubuntu-latest, manylinux_x86_64, ""]
+          - [ubuntu-latest, musllinux_x86_64, ""]
+          - [ubuntu-24.04-arm, manylinux_aarch64, ""]
+          # - [ubuntu-24.04-arm, musllinux_aarch64, ""]
+          - [windows-latest, win_amd64, ""]
+        python: ["cp312"]
 
     steps:
       - name: 🔍 Checkout current repo
@@ -69,11 +40,13 @@ jobs:
 
       - name: 🔧 Build wheels
         uses: pypa/cibuildwheel@v2.22.0
+        env:
+          CIBW_BUILD: ${{ matrix.python }}-${{ matrix.buildplat[1] }}
 
       - name: 📤 Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: cibw-wheels-${{ matrix.os }}-${{ strategy.job-index }}
+          name: cibw-wheels-${{ matrix.python }}-${{ matrix.buildplat[0] }}-${{ matrix.buildplat[1] }}
           path: ./wheelhouse/*.whl
 
   make_sdist:
