@@ -26,32 +26,13 @@ Note that if cython updates the `.c` file and this file is tracked, building the
 So `setuptools_scm` will set a new local version number: `vX.Y.Z+dev0-slkfjslfjas-sdnalkd` instead of desired `vX.Y.Z`.
 Current workaround is removing `.c` files from repo.
 
-## Reproduce LW error
+## Solution
 
-### Packages that I can install
-Listing Python packages that I managed to install.
-- [x] `cloudpickle`
-- [x] `matplotlib`
-- [x] `pandas`
-- [x] `palettable`
-- [x] `pre-commit`
-- [x] `pymoo`
-- [x] `scipy`
-- [ ] `tkinter` (sometimes problematic, not checked yet)
-
-### Distributions that have a problem with unchecked previous packages
-(test on `scipy`)
-- [x] `macos-13`
-- [x] `macos-latest`
-- [x] `ubuntu-latest`
-- [ ] `ubuntu-24.04-arm` (last problematic OS)
-- [x] `windows-latest`
-
-### Notes
-- Putting the packages in `[build-system].requires` also creates the failure.
-- The thing is that it tries to build the `.tar.gz` dependencies instead of using the `.whl`.
-    - Note that `matplotlib 3.10.0-cp312-cp312` does not exit in compiled version for 32 bit Windows.
+Now, the list of architectures/OS to build or exclude are explicitly written in the `buildplat` variable in `.github/workflows/cd.yml`.
+Generally speaking, problem comes from non-existing `.whl` that cannot be compiled on specific architectures/OS.
+They *could* be compiled, but this is not so important.
 
 > [!IMPORTANT]
-> On `windows-latest`, the solution was to set `[tools.cibuildwheel].archs = "auto64"`.
-> As the wheel did not exist in 32-bits, gh actions tried to build it but did not have the required tools.
+> In the end, it was necessary to manually set which OS and architectures should be built.
+> This is also what other libraries, such as `scipy` or `numpy`, do.
+> Maybe I'll have to update this workflow from time to time...
