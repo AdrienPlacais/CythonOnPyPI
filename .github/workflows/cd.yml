@@ -15,31 +15,36 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        os: [macos-13, macos-latest, ubuntu-latest, ubuntu-24.04-arm, windows-latest]
         python-version: [3.12]
-        include:
+        exclude:
+          - os: ubuntu-24.04-arm
+            python: 3.12
+            platform_id: musllinux_aarch64
+        # include:
           # =====
           # MacOS
           # =====
-          - os: macos-13
-            python: 3.12
-            platform_id: macosx_x86_64
-          - os: macos-latest
-            python: 3.12
-            platform_id: macosx_arm64
+          # - os: macos-13
+          #   python: 3.12
+          #   platform_id: macosx_x86_64
+          # - os: macos-latest
+          #   python: 3.12
+          #   platform_id: macosx_arm64
           # ======
           # Ubuntu
           # ======
           ## Latest
-          - os: ubuntu-latest
-            python: 3.12
-            platform_id: manylinux_x86_64
-          - os: ubuntu-latest
-            python: 3.12
-            platform_id: musllinux_x86_64
+          # - os: ubuntu-latest
+          #   python: 3.12
+          #   platform_id: manylinux_x86_64
+          # - os: ubuntu-latest
+          #   python: 3.12
+          #   platform_id: musllinux_x86_64
           ## 24
-          - os: ubuntu-24.04-arm
-            python: 3.12
-            platform_id: manylinux_aarch64
+          # - os: ubuntu-24.04-arm
+          #   python: 3.12
+          #   platform_id: manylinux_aarch64
           # This one will fail on CP312; deactivate it for now...
           # - os: ubuntu-24.04-arm
           #   python: 3.12
@@ -47,9 +52,9 @@ jobs:
           # =======
           # Windows
           # =======
-          - os: windows-latest
-            python: 3.12
-            platform_id: win_amd64
+          # - os: windows-latest
+          #   python: 3.12
+          #   platform_id: win_amd64
 
     steps:
       - name: 🔍 Checkout current repo
