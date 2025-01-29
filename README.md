@@ -37,13 +37,14 @@ Listing Python packages that I managed to install.
 - [x] `pre-commit`
 - [x] `pymoo`
 - [x] `scipy`
+- [ ] `tkinter` (sometimes problematic, not checked yet)
 
 ### Distributions that have a problem with unchecked previous packages
 (test on `scipy`)
 - [x] `macos-13`
 - [x] `macos-latest`
 - [x] `ubuntu-latest`
-- [ ] `ubuntu-24.04-arm`
+- [ ] `ubuntu-24.04-arm` (last problematic OS)
 - [x] `windows-latest`
 
 ### Notes
