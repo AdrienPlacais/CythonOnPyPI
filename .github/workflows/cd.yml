@@ -39,6 +39,8 @@ jobs:
         exclude:
           # Does not manage to build scipy
           - buildplat: [ubuntu-24.04-arm, musllinux_aarch64]
+          # Does not manage to build matplotlib
+          - buildplat: [windows-latest, win32]
 
     steps:
       - name: 🔍 Checkout current repo
