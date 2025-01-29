@@ -1,4 +1,4 @@
-name: 🏷️ Release tagged versions
+name: 🚀🏷️ Release tagged versions
 
 on:
   workflow_dispatch:
