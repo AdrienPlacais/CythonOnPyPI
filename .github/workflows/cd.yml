@@ -10,7 +10,7 @@ on:
 
 jobs:
   build_wheels:
-    name: 🎡 Build wheels ${{ matrix.python }}-${{ matrix.buildplat[1] }}-${{ matrix.buildplat[2] }}
+    name: 🎡 Build wheels ${{ matrix.python }}-${{ matrix.buildplat[1] }}
     runs-on: ${{ matrix.buildplat[0] }}
     strategy:
       fail-fast: false
@@ -18,13 +18,13 @@ jobs:
         # This is taken from numpy's wheel.yml
         # See also: https://github.com/github/feedback/discussions/7835#discussioncomment-1769026
         buildplat:
-          - [macos-13, macosx_x86_64, ""]
-          - [macos-latest, macosx_arm64, ""]
-          - [ubuntu-latest, manylinux_x86_64, ""]
-          - [ubuntu-latest, musllinux_x86_64, ""]
-          - [ubuntu-24.04-arm, manylinux_aarch64, ""]
-          - [ubuntu-24.04-arm, musllinux_aarch64, ""]
-          - [windows-latest, win_amd64, ""]
+          - [macos-13, macosx_x86_64]
+          - [macos-latest, macosx_arm64]
+          - [ubuntu-latest, manylinux_x86_64]
+          - [ubuntu-latest, musllinux_x86_64]
+          - [ubuntu-24.04-arm, manylinux_aarch64]
+          - [ubuntu-24.04-arm, musllinux_aarch64]
+          - [windows-latest, win_amd64]
         python: ["cp312", "cp313"]
 
     steps:
