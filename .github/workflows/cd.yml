@@ -10,7 +10,7 @@ on:
 
 jobs:
   build_wheels:
-    name: 🎡 Build wheels on ${{ matrix.os }} for ${{ matrix.python-version }}
+    name: 🎡 Build wheels ${{ matrix.os }}-${{ matrix.platform_id }}-${{ matrix.python-version }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
