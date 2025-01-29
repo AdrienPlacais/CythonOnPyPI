@@ -33,10 +33,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: 🐍 Setup Python ${{ matrix.python-version }} on ${{ matrix.os }}
+      - name: 🐍 Setup Python ${{ matrix.python }} on ${{ matrix.buildplat[0] }}
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: ${{ matrix.python }}
 
       - name: 🔧 Build wheels
         uses: pypa/cibuildwheel@v2.22.0
