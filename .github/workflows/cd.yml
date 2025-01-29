@@ -8,7 +8,7 @@ on:
 
 jobs:
   build_wheels:
-    name: Build wheels on ${{ matrix.os }}
+    name: 🎡 Build wheels on ${{ matrix.os }} for ${{ matrix.python-version }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -16,41 +16,42 @@ jobs:
         python-version: ["3.12"]
 
     steps:
-      - name: Checkout Python
+      - name: 🔍 Checkout current repo
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Setup Python ${{ matrix.python-version }}
+      - name: 🐍 Setup Python ${{ matrix.python-version }} on ${{ matrix.os }}
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Build wheels
+      - name: 🔧 Build wheels
         uses: pypa/cibuildwheel@v2.22.0
 
-      - uses: actions/upload-artifact@v4
+      - uses: 🚀 actions/upload-artifact@v4
         with:
           name: cibw-wheels-${{ matrix.os }}-${{ strategy.job-index }}
           path: ./wheelhouse/*.whl
 
   make_sdist:
-    name: Make SDist  # SDist is .tar.gz
+    name: 📁 Make SDist  # SDist is .tar.gz
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
       with:
-        fetch-depth: 0  # Optional, use if you use setuptools_scm
+        fetch-depth: 0
 
-    - name: Build SDist
+    - name: 🔧 Build SDist
       run: pipx run build --sdist
 
-    - uses: actions/upload-artifact@v4
+    - uses: 🚀 actions/upload-artifact@v4
       with:
         name: cibw-sdist
         path: dist/*.tar.gz
 
   upload_all:
+    name: 🚀 Release wheel and SDist
     needs: [build_wheels, make_sdist]
     environment: release
     permissions:
