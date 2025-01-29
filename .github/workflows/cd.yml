@@ -53,7 +53,7 @@ jobs:
           path: ./wheelhouse/*.whl
 
   make_sdist:
-    name: 📁 Make SDist  # SDist is .tar.gz
+    name: 📁 Make SDist
     runs-on: ubuntu-latest
     steps:
     - name: 🔍 Checkout current repo
