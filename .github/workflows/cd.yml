@@ -19,7 +19,7 @@ jobs:
         python-version: [3.12]
         exclude:
           - os: ubuntu-24.04-arm
-            python: 3.12
+            python-version: 3.12
             platform_id: musllinux_aarch64
         # include:
           # =====
