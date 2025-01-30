@@ -17,7 +17,7 @@ jobs:
       - name: 🧃 Extract version and date
         id: version
         run: |
-          TAG=${GITHUB_REF#refs/tags/}
+          TAG=${GITHUB_REF#refs/tags/:1}
           DATE=$(date -u +"%Y-%m-%d")
           echo "version=$TAG" #>> $GITHUB_ENV
           echo "date-released=$DATE" #>> $GITHUB_ENV
