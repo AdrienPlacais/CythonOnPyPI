@@ -5,8 +5,6 @@ on:
   push:
     tags:
       - "[0-9]+.[0-9]+.[0-9]+"
-    branches:
-      - ci/auto-update-cff
 
 jobs:
   update-citation:
