@@ -18,7 +18,7 @@ jobs:
       - name: 🔍 Checkout current repo
         uses: actions/checkout@v4
         with:
-          persists-credentials: false
+          persists-credentials: true
           fetch-depth: 0
 
       - name: 🧃 Extract version and date
