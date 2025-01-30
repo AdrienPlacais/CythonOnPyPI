@@ -27,12 +27,12 @@ jobs:
           VERSION=${TAG:1}
           DATE=$(date -u +"%Y-%m-%d")
           echo "version=$VERSION" >> $GITHUB_ENV
-          echo "date-released=$DATE" >> $GITHUB_ENV
+          echo "date=$DATE" >> $GITHUB_ENV
 
       - name: ♻️  Update CITATION.cff
         run: |
           sed -i "s/^version:.*/version: ${{ env.version }}/" CITATION.cff
-          sed -i "s/^date-released:.*/date-released: ${{ env.date }}/" CITATION.cff
+          sed -i "s/^date-released:.*/date-released: '${{ env.date }}'/" CITATION.cff
 
       - name: 💾 Commit changes
         run: |
