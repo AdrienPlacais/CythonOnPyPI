@@ -2,8 +2,8 @@ cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 title: "CythonOnPyPi"
 abstract: A sandbox for CI testing.
-version: 1.2.13
-date-released: 
+version: 1.2.14
+date-released: '2025-01-30'
 authors:
   - family-names: Plaçais
     given-names: Adrien
