@@ -21,8 +21,8 @@ jobs:
         run: |
           TAG=${GITHUB_REF#refs/tags/}
           DATE=$(date -u +"%Y-%m-%d")
-          echo "version=$TAG" >> $GITHUB_ENV
-          echo "date-released=$DATE" >> $GITHUB_ENV
+          echo "version=$TAG" #>> $GITHUB_ENV
+          echo "date-released=$DATE" #>> $GITHUB_ENV
 
       # - name: ♻️  Update CITATION.cff
       #   run: |
