@@ -1,7 +1,6 @@
 name: 📝 Update CITATION.cff
 
 on:
-  workflow_dispatch:
   push:
     tags:
       - "v[0-9]+.[0-9]+.[0-9]+"
@@ -27,8 +26,10 @@ jobs:
           TAG=${GITHUB_REF#refs/tags/}
           VERSION=${TAG:1}
           DATE=$(date -u +"%Y-%m-%d")
+          BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
           echo "version=$VERSION" >> $GITHUB_ENV
           echo "date-released=$DATE" >> $GITHUB_ENV
+          echo $BRANCH
 
       - name: ♻️  Update CITATION.cff
         run: |
@@ -42,8 +43,8 @@ jobs:
           git add CITATION.cff
           git commit -m "Update CITATION.cff for release ${{ env.version }}"
 
-      - name: 🌱 Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+      # - name: 🌱 Push changes to current branch
+      #   uses: ad-m/github-push-action@master
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     branch: ${{ github.ref_name }}
