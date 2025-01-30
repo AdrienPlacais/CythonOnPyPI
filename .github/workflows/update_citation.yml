@@ -6,6 +6,10 @@ on:
     tags:
       - "v[0-9]+.[0-9]+.[0-9]+"
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   update-citation:
     runs-on: ubuntu-latest
@@ -13,6 +17,9 @@ jobs:
     steps:
       - name: 🔍 Checkout current repo
         uses: actions/checkout@v4
+        with:
+          persists-credentials: false
+          fetch-depth: 0
 
       - name: 🧃 Extract version and date
         id: version
@@ -28,10 +35,15 @@ jobs:
           sed -i "s/^version:.*/version: ${{ env.version }}/" CITATION.cff
           sed -i "s/^date-released:.*/date-released: ${{ env.date }}/" CITATION.cff
 
-      - name: 💾 Commit and push changes
+      - name: 💾 Commit changes
         run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
           git add CITATION.cff
           git commit -m "Update CITATION.cff for release ${{ env.version }}"
-          git push
+
+      - name: 🌱 Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
