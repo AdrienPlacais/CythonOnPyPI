@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "CythonOnPyPi"
+abstract: A sandbox for CI testing.
+version: 1.1.1
+date-released: "2025-01-30"
+authors:
+  - family-names: Plaçais
+    given-names: Adrien
+    orcid: "https://orcid.org/0000-0001-6840-1685"
+identifiers:
+  - description: This is the article that presented the code.
+    type: doi
+    value: "10.0000/nan.00000000"
+license: MIT
+repository-code: "https://github.com/AdrienPlacais/CythonOnPyPi"
