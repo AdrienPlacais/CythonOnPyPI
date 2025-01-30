@@ -1,0 +1,38 @@
+name: 📝 Update CITATION.cff
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "[0-9]+.[0-9]+.[0-9]+"
+    branches:
+      - ci/auto-update-cff
+
+jobs:
+  update-citation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🔍 Checkout current repo
+        uses: actions/checkout@v4
+
+      - name: 🧃 Extract version and date
+        id: version
+        run: |
+          TAG=${GITHUB_REF#refs/tags/}
+          DATE=$(date -u +"%Y-%m-%d")
+          echo "version=$TAG" >> $GITHUB_ENV
+          echo "date-released=$DATE" >> $GITHUB_ENV
+
+      # - name: ♻️  Update CITATION.cff
+      #   run: |
+      #     sed -i "s/^version:.*/version: ${{ env.version }}/" CITATION.cff
+      #     sed -i "s/^date-released:.*/date-released: ${{ env.date }}/" CITATION.cff
+      #
+      # - name: 💾 Commit and push changes
+      #   run: |
+      #     git config --global user.name "github-actions"
+      #     git config --global user.email "github-actions@github.com"
+      #     git add CITATION.cff
+      #     git commit -m "Update CITATION.cff for release ${{ env.version }}"
+      #     git push
