@@ -26,7 +26,7 @@ jobs:
           TAG=${GITHUB_REF#refs/tags/}
           VERSION=${TAG:1}
           DATE=$(date -u +"%Y-%m-%d")
-          BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+          BRANCH=$(git branch -r --contains ${{ github.ref }}) --format "%(refname:lstrip=3)"
           echo "version=$VERSION" >> $GITHUB_ENV
           echo "date-released=$DATE" >> $GITHUB_ENV
           echo $BRANCH
