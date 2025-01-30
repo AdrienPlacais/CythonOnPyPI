@@ -26,10 +26,12 @@ jobs:
           TAG=${GITHUB_REF#refs/tags/}
           VERSION=${TAG:1}
           DATE=$(date -u +"%Y-%m-%d")
-          BRANCH=$(git branch -r --contains ${{ github.ref }}) --format "%(refname:lstrip=3)"
           echo "version=$VERSION" >> $GITHUB_ENV
           echo "date-released=$DATE" >> $GITHUB_ENV
-          echo $BRANCH
+          raw=$(git branch -r --contains ${{ github.ref }})
+          branch=${raw##*/}
+          echo "branch=$branch" >> $GITHUB_OUTPUT
+          echo "Branch is $branch."
 
       - name: ♻️  Update CITATION.cff
         run: |
