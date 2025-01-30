@@ -28,22 +28,26 @@ jobs:
           DATE=$(date -u +"%Y-%m-%d")
           echo "version=$VERSION" >> $GITHUB_ENV
           echo "date-released=$DATE" >> $GITHUB_ENV
-          raw=$(git branch -r --contains ${{ github.ref }})
-          branch=${raw##*/}
-          echo "branch=$branch" >> $GITHUB_OUTPUT
-          echo "Branch is $branch."
 
       - name: ♻️  Update CITATION.cff
         run: |
           sed -i "s/^version:.*/version: ${{ env.version }}/" CITATION.cff
           sed -i "s/^date-released:.*/date-released: ${{ env.date }}/" CITATION.cff
 
-      - name: 💾 Commit changes
+      - name: 🧩 Extract branch name
+        id: branch
         run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add CITATION.cff
-          git commit -m "Update CITATION.cff for release ${{ env.version }}"
+          TAG_SHA=$(git rev-list -n 1 ${{ github.ref_name }})
+          BRANCH_NAME=$(git branch -r --contains $TAG_SHA | grep -v HEAD | sed 's/origin\///' | head -n 1 | tr -d '[:space:]')
+          echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
+          echo $BRANCH_NAME
+
+      # - name: 💾 Commit changes
+      #   run: |
+      #     git config --local user.email "github-actions[bot]@users.noreply.github.com"
+      #     git config --local user.name "github-actions[bot]"
+      #     git add CITATION.cff
+      #     git commit -m "Update CITATION.cff for release ${{ env.version }}"
 
       # - name: 🌱 Push changes to current branch
       #   uses: ad-m/github-push-action@master
